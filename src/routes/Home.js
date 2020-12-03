@@ -12,14 +12,17 @@ class Home extends React.Component {
   }
 
   getMovies = async () => {
+    const clientId = "5DD7QG87COD4ANQXA827";
+    const nation = "대한민국";
+    const type = "극영화";
+    const releaseDts = "20201101";
     const {
-      data: {
-        data: { movies }
-      }
+      data: { Data }
     } = await axios.get(
-      "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
+      `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=${clientId}&nation=${nation}&releaseDts=${releaseDts}&type=${type}&detail=Y&listCount=500`
     );
-    this.setState({ movies, isLoading: false });
+
+    this.setState({ movies: Data[0], isLoading: false });
   };
 
   componentDidMount() {
@@ -41,15 +44,18 @@ class Home extends React.Component {
           </div>
         ) : (
           <div className="movies">
-            {movies.map((item) => (
+            {movies.Result.map((item) => (
               <Movie
-                key={item.id}
-                id={item.id}
+                key={item.DOCID}
+                id={item.DOCID}
                 title={item.title}
-                year={item.year}
-                summary={item.summary}
-                poster={item.medium_cover_image}
-                genres={item.genres}
+                year={item.prodYear}
+                summary={
+                  item.plots.plot.find((text) => text.plotLang === "한국어")
+                    .plotText
+                }
+                poster={item.posters}
+                genres={item.genre}
               />
             ))}
           </div>

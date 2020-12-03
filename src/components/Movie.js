@@ -18,15 +18,19 @@ function Movie({ id, title, year, summary, poster, genres }) {
           }
         }}
       >
-        <img src={poster} alt={title} title={title} />
+        <img
+          src={
+            poster.indexOf("|") > -1
+              ? poster.slice(0, poster.indexOf("|"))
+              : poster
+          }
+          alt={title}
+          title={title}
+        />
         <div className="movie__data">
           <h3 className="movie__title">{title}</h3>
           <h5 className="movie__year">{year}</h5>
-          <ul className="movie__genres">
-            {genres.map((genre, index) => (
-              <li key={index}>{genre}</li>
-            ))}
-          </ul>
+          <p className="movie__genres">{genres}</p>
           <p className="movie__summary">{summary.slice(0, 140)}...</p>
         </div>
       </Link>
@@ -35,12 +39,12 @@ function Movie({ id, title, year, summary, poster, genres }) {
 }
 
 Movie.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  year: PropTypes.string.isRequired,
   summary: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired
+  genres: PropTypes.string.isRequired
 };
 
 export default Movie;

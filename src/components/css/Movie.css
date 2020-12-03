@@ -43,14 +43,10 @@
 }
 
 .movie .movie__genres {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
   margin: 5px 0px;
 }
 
-.movie__genres li,
+.movie__genres,
 .movie .movie__year {
   margin-right: 8px;
   font-size: 14px;
