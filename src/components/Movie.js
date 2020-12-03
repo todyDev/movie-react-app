@@ -18,15 +18,7 @@ function Movie({ id, title, year, summary, poster, genres }) {
           }
         }}
       >
-        <img
-          src={
-            poster.indexOf("|") > -1
-              ? poster.slice(0, poster.indexOf("|"))
-              : poster
-          }
-          alt={title}
-          title={title}
-        />
+        <img src={poster.indexOf("|") > -1 ? poster.slice(0, poster.indexOf("|")) : poster} alt={title} title={title} />
         <div className="movie__data">
           <h3 className="movie__title">{title}</h3>
           <h5 className="movie__year">{year}</h5>

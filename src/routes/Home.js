@@ -50,10 +50,7 @@ class Home extends React.Component {
                 id={item.DOCID}
                 title={item.title}
                 year={item.prodYear}
-                summary={
-                  item.plots.plot.find((text) => text.plotLang === "한국어")
-                    .plotText
-                }
+                summary={item.plots.plot.find((text) => text.plotLang === "한국어").plotText}
                 poster={item.posters}
                 genres={item.genre}
               />
